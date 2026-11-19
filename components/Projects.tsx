@@ -1,176 +1,279 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, Cpu, Zap, CreditCard, BarChart3, X, Code2 } from "lucide-react";
-import MusicRecommender from "./music-ai"; 
+import { motion } from "framer-motion";
+import { ExternalLink, Github, Star } from "lucide-react";
 
-// 1. เพิ่ม Interface เพื่อระบุประเภทข้อมูลของ Project
 interface Project {
-  id: string;
   title: string;
-  tech: string;
-  icon: React.ReactNode;
-  status: string;
-  github: string;
+  category?: string;
   description: string;
+  technologies: string[];
+  features?: string[];
+  liveDemo?: string;
+  github?: string;
+  featured?: boolean;
 }
 
 const projects: Project[] = [
   {
-    id: "mlbb",
-    title: "MLBB Draft-Pick System",
-    tech: "Node.js, Firebase, Cloudinary",
-    icon: <BarChart3 size={20} className="text-cyan-400" />,
-    status: "COMPLETE",
-    github: "https://github.com/JKP456/API2",
-    description: "Professional tournament draft engine featuring a real-time broadcast control panel and dynamic hero pool management."
+    title: "Talkative AI",
+    category: "Full-Stack AI Application",
+    description:
+      "An AI-powered speaking coach designed to help users practice communication, receive speaking feedback, and improve their speaking skills through personalized learning activities.",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Fastify",
+      "PostgreSQL",
+      "Prisma",
+      "Google Gemini API",
+      "Docker",
+      "Vitest",
+      "Playwright",
+    ],
+    features: [
+      "AI-powered speaking practice",
+      "Personalized AI feedback",
+      "Speech performance analytics",
+      "Learning recommendations",
+      "User authentication and session management",
+      "Secure audio upload and playback",
+      "Automated testing",
+    ],
+    liveDemo: "https://talkativeai-frontend.vercel.app/",
+    featured: true,
   },
   {
-    id: "auto-form",
-    title: "Google Forms Auto-Fill Bot",
-    tech: "Python, Selenium, Pandas",
-    icon: <Zap size={20} className="text-orange-500" />,
-    status: "COMPLETE",
-    github: "https://github.com/JKP456/BotFillAuto", 
-    description: "High-speed automated data entry bot for Google Forms. Processes large datasets from Excel/CSV with 100% accuracy."
+    title: "AI Product Moderation System",
+    description:
+      "A web application for managing and moderating product listings, integrating a Python-based AI backend for product image and content analysis.",
+    technologies: ["Next.js", "MongoDB", "Python", "Cloudinary"],
   },
   {
-    id: "music-ai",
-    title: "Mood-Based Music AI",
-    tech: "Python, Flask, Scikit-learn",
-    icon: <Cpu size={20} className="text-purple-500" />,
-    status: "LIVE_DEMO",
-    github: "https://github.com/JKP456/Mood-Based-Music-Recommender-main",
-    description: "AI-driven recommendation system using Random Forest to analyze user mood and audio features for personalized playlists."
+    title: "TermGame — Game Top-Up Platform",
+    description:
+      "A game top-up platform with customer-facing and administrative workflows, database operations, and payment integration.",
+    technologies: ["Next.js", "Prisma", "Stripe API", "SQL"],
   },
   {
-    id: "bot",
-    title: "Game Boss Automation",
-    tech: "Python, ADB, OpenCV",
-    icon: <Zap size={20} className="text-yellow-500" />,
-    status: "COMPLETE",
-    github: "https://github.com/JKP456/BotADB",
-    description: "Mobile game automation tool utilizing computer vision for pattern recognition and automated task execution."
+    title: "Game Boss Automation Bot",
+    description:
+      "An automation bot using computer vision and Android automation to recognize screen elements and perform game interactions.",
+    technologies: ["Python", "OpenCV", "Android Debug Bridge (ADB)"],
   },
-  {
-    id: "topup",
-    title: "Secure Top-up Portal",
-    tech: "Next.js, Prisma, Supabase, Stripe",
-    icon: <CreditCard size={20} className="text-blue-500" />,
-    status: "INPROGRESS",
-    github: "https://github.com/JKP456/TermGame",
-    description: "E-commerce platform with automated digital delivery and secure payment integration for gaming credits."
-  }
 ];
 
-export default function Projects() {
-  // 2. กำหนดประเภทให้ useState เป็น <Project | null> เพื่อรองรับทั้งค่าว่างและข้อมูลโปรเจกต์
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null); 
-
+function FeaturedProject({ project }: { project: Project }) {
   return (
-    <section id="projects" className="py-24 px-6 bg-black min-h-screen font-mono">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-center gap-3 mb-12">
-          <span className="text-green-500 font-bold">$</span>
-          <h2 className="text-2xl text-white uppercase tracking-[0.2em]">ls ./deployed_projects</h2>
-          <motion.span 
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ repeat: Infinity, duration: 0.8 }}
-            className="w-2.5 h-6 bg-green-500"
-          />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="mb-10 rounded-xl border border-[#00E676]/20 bg-[#101613] overflow-hidden glow-sm"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-5">
+        {/* Screenshot Placeholder */}
+        <div className="lg:col-span-2 bg-[#080B0A] border-b lg:border-b-0 lg:border-r border-[#26332B] flex items-center justify-center min-h-[280px] relative">
+          <div className="text-center p-8">
+            <div className="w-16 h-16 rounded-xl bg-[#00E676]/10 border border-[#00E676]/20 flex items-center justify-center mx-auto mb-4">
+              <Star size={28} className="text-[#00E676]" />
+            </div>
+            <p className="text-sm font-semibold text-[#F5F7F5]">
+              {project.title}
+            </p>
+            <p className="text-xs text-[#9CA8A0] mt-1">{project.category}</p>
+          </div>
+          {/* Featured badge */}
+          <div className="absolute top-4 left-4">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#00E676]/10 border border-[#00E676]/20 text-[#00E676] text-xs font-medium">
+              <Star size={12} />
+              Featured Project
+            </span>
+          </div>
         </div>
 
-        {/* Grid Responsive: 1 คอลัมน์บนมือถือ และ 5 คอลัมน์บนจอใหญ่ตามที่คุณต้องการ */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"> 
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative bg-[#080808] border border-green-900/20 p-5 rounded-lg hover:border-green-500/40 transition-all flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex justify-between items-start mb-4">
-                  <div className="p-2 bg-black border border-green-900/30 rounded group-hover:border-green-500/50 transition-colors">
-                    {project.icon}
-                  </div>
-                  <span className={`text-[8px] px-2 py-0.5 rounded border ${
-                    project.status === "COMPLETE" ? "text-green-500 border-green-900 bg-green-950/10" : 
-                    project.status === "LIVE_DEMO" ? "text-purple-500 border-purple-900 bg-purple-950/10" :
-                    "text-yellow-600 border-yellow-900 bg-yellow-950/10"
-                  }`}>
-                    {project.status}
-                  </span>
-                </div>
+        {/* Content */}
+        <div className="lg:col-span-3 p-6 md:p-8">
+          <h3 className="text-2xl font-bold text-[#F5F7F5] mb-2">
+            {project.title}
+          </h3>
+          {project.category && (
+            <p className="text-sm text-[#00E676] font-medium mb-4">
+              {project.category}
+            </p>
+          )}
+          <p className="text-[#9CA8A0] leading-relaxed mb-6">
+            {project.description}
+          </p>
 
-                <h3 className="text-md font-bold text-white mb-2 group-hover:text-green-400 leading-tight">
-                  {project.title}
-                </h3>
-                
-                <p className="text-gray-500 text-[11px] mb-4 leading-relaxed h-20 line-clamp-4">
-                  {">"} {project.description}
-                </p>
-              </div>
-
-              <div className="mt-auto">
-                <div className="pt-3 border-t border-green-900/10 mb-3 flex flex-wrap gap-1">
-                  {project.tech.split(', ').slice(0, 2).map((t) => (
-                    <span key={t} className="text-[8px] text-gray-600 uppercase">#{t}</span>
-                  ))}
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <a 
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-1 bg-[#111] hover:bg-green-950/20 text-gray-400 hover:text-green-500 border border-white/5 hover:border-green-500/50 py-1.5 rounded text-[9px] transition-all"
+          {/* Key Features */}
+          {project.features && (
+            <div className="mb-6">
+              <h4 className="text-xs font-semibold text-[#9CA8A0] uppercase tracking-wider mb-3">
+                Key Features
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                {project.features.map((feature) => (
+                  <div
+                    key={feature}
+                    className="flex items-center gap-2 text-sm text-[#9CA8A0]"
                   >
-                    <Code2 size={12} /> SOURCE
-                  </a>
-
-                  {project.id === "music-ai" ? (
-                    <button 
-                      onClick={() => setSelectedProject(project)}
-                      className="flex items-center justify-center gap-1 bg-green-600/10 hover:bg-green-600/20 text-green-500 border border-green-600/30 py-1.5 rounded text-[9px] transition-all"
-                    >
-                      <Terminal size={12} /> RUN
-                    </button>
-                  ) : (
-                    <div className="flex items-center justify-center text-gray-700 border border-white/5 py-1.5 rounded text-[8px] opacity-40 cursor-default">
-                        SECURE_LINK
-                    </div>
-                  )}
-                </div>
+                    <div className="w-1 h-1 rounded-full bg-[#00E676] shrink-0" />
+                    {feature}
+                  </div>
+                ))}
               </div>
-            </motion.div>
-          ))}
+            </div>
+          )}
+
+          {/* Tech Tags */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.technologies.map((tech) => (
+              <span
+                key={tech}
+                className="px-2.5 py-1 bg-[#080B0A] border border-[#26332B] text-[#9CA8A0] text-xs rounded-md"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-3">
+            {project.liveDemo && (
+              <a
+                href={project.liveDemo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00E676] text-[#080B0A] font-semibold text-sm rounded-lg hover:bg-[#00C853] transition-all"
+              >
+                <ExternalLink size={15} />
+                Live Demo
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#26332B] text-[#F5F7F5] font-semibold text-sm rounded-lg hover:bg-[#101613] hover:border-[#00E676]/30 transition-all"
+              >
+                <Github size={15} />
+                GitHub
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="group rounded-lg border border-[#26332B] bg-[#101613] overflow-hidden hover:border-[#00E676]/20 transition-all duration-300 flex flex-col"
+    >
+      {/* Screenshot Placeholder */}
+      <div className="bg-[#080B0A] border-b border-[#26332B] h-40 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-10 h-10 rounded-lg bg-[#101613] border border-[#26332B] flex items-center justify-center mx-auto mb-2 group-hover:border-[#00E676]/20 transition-colors">
+            <Code size={18} className="text-[#9CA8A0] group-hover:text-[#00E676] transition-colors" />
+          </div>
+          <p className="text-xs text-[#9CA8A0]">{project.title}</p>
         </div>
       </div>
 
-      {/* Modal - ปรับให้ Compact */}
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/90 backdrop-blur-sm">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="relative w-full max-w-md bg-[#050505] border border-green-500/30 rounded-lg overflow-hidden"
+      {/* Content */}
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="text-base font-semibold text-[#F5F7F5] mb-2 group-hover:text-[#00E676] transition-colors">
+          {project.title}
+        </h3>
+        <p className="text-sm text-[#9CA8A0] leading-relaxed mb-4 flex-1">
+          {project.description}
+        </p>
+
+        {/* Tech Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {project.technologies.map((tech) => (
+            <span
+              key={tech}
+              className="px-2 py-0.5 bg-[#080B0A] border border-[#26332B] text-[#9CA8A0] text-[11px] rounded"
             >
-              <div className="bg-[#0a0a0a] border-b border-green-900/30 px-4 py-2 flex justify-between items-center">
-                <span className="text-[10px] text-green-900 uppercase font-bold tracking-widest">executor.exe</span>
-                <button onClick={() => setSelectedProject(null)} className="text-green-900 hover:text-green-500"><X size={18} /></button>
-              </div>
-              <div className="max-h-[70vh] overflow-y-auto p-2">
-                <MusicRecommender />
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Actions */}
+        <div className="flex gap-2 mt-auto">
+          {project.liveDemo && (
+            <a
+              href={project.liveDemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#00E676]/10 border border-[#00E676]/20 text-[#00E676] text-xs font-medium rounded-md hover:bg-[#00E676]/20 transition-all"
+            >
+              <ExternalLink size={13} />
+              Live Demo
+            </a>
+          )}
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-2 border border-[#26332B] text-[#9CA8A0] text-xs font-medium rounded-md hover:text-[#F5F7F5] hover:border-[#00E676]/20 transition-all"
+            >
+              <Github size={13} />
+              GitHub
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// Need to import Code from lucide
+import { Code } from "lucide-react";
+
+export default function Projects() {
+  const featuredProject = projects.find((p) => p.featured);
+  const otherProjects = projects.filter((p) => !p.featured);
+
+  return (
+    <section id="projects" className="py-24">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        {/* Section Header */}
+        <div className="flex items-center gap-3 mb-10">
+          <div className="h-px w-8 bg-[#00E676]" />
+          <h2 className="text-2xl font-bold text-[#F5F7F5]">
+            Featured Projects
+          </h2>
+        </div>
+
+        {/* Featured Project */}
+        {featuredProject && <FeaturedProject project={featuredProject} />}
+
+        {/* Other Projects Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {otherProjects.map((project, index) => (
+            <ProjectCard key={project.title} project={project} index={index} />
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }

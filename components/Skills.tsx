@@ -1,67 +1,95 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, ShieldCheck, BrainCircuit, Globe } from "lucide-react";
+import {
+  Globe,
+  Server,
+  Database,
+  BrainCircuit,
+  Container,
+  ShieldCheck,
+} from "lucide-react";
 
 const skillCategories = [
   {
-    title: "Web_Development.js",
+    title: "Frontend",
     icon: <Globe size={18} />,
-    skills: ["Next.js", "React", "Prisma", "Tailwind", "Firebase"],
-    status: "OPTIMIZED",
+    skills: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS"],
   },
   {
-    title: "Cyber_Security.sh",
-    icon: <ShieldCheck size={18} />,
-    skills: ["Vulnerability Assessment", "Network Security", "Auth Protocols", "Hardening"],
-    status: "SECURED",
+    title: "Backend",
+    icon: <Server size={18} />,
+    skills: ["Node.js", "Fastify", "NestJS", "FastAPI", "RESTful APIs"],
   },
   {
-    title: "Artificial_Intelligence.py",
+    title: "Database",
+    icon: <Database size={18} />,
+    skills: ["PostgreSQL", "MongoDB", "Prisma", "Firebase"],
+  },
+  {
+    title: "AI & Automation",
     icon: <BrainCircuit size={18} />,
-    skills: ["LLM Integration", "Automation", "Data Modeling", "Python"],
-    status: "ACTIVE",
+    skills: [
+      "Google Gemini API",
+      "OCR",
+      "Python",
+      "OpenCV",
+      "Machine Learning",
+      "Android Debug Bridge",
+    ],
   },
   {
-    title: "Core_Systems.env",
-    icon: <Code2 size={18} />,
-    skills: ["AWS", "Node.js", "TypeScript", "SQL/NoSQL"],
-    status: "STABLE",
+    title: "DevOps",
+    icon: <Container size={18} />,
+    skills: ["Docker", "Docker Compose", "Vercel", "Cloudflare", "AWS EC2"],
+  },
+  {
+    title: "Security & Testing",
+    icon: <ShieldCheck size={18} />,
+    skills: [
+      "Nmap",
+      "Application Security Testing",
+      "Vulnerability Assessment",
+      "Vitest",
+      "Playwright",
+    ],
   },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-6 bg-black">
-      <div className="max-w-5xl mx-auto">
+    <section id="skills" className="py-24">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
         {/* Section Header */}
-        <div className="mb-12 flex items-center gap-3 font-mono">
-          <span className="text-green-500 font-bold">$</span>
-          <h2 className="text-2xl text-white uppercase tracking-widest">list --skills --all</h2>
+        <div className="flex items-center gap-3 mb-10">
+          <div className="h-px w-8 bg-[#00E676]" />
+          <h2 className="text-2xl font-bold text-[#F5F7F5]">Technical Skills</h2>
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {skillCategories.map((category, idx) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: idx * 0.1 }}
+              key={category.title}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.08 }}
               viewport={{ once: true }}
-              className="border border-green-900/30 bg-[#050505] p-6 rounded-lg group hover:border-green-500/50 transition-colors"
+              className="p-5 rounded-lg border border-[#26332B] bg-[#101613] hover:border-[#00E676]/30 transition-all duration-300 group"
             >
               {/* Category Header */}
-              <div className="flex justify-between items-center mb-6 border-b border-green-900/20 pb-4">
-                <div className="flex items-center gap-3 text-green-400">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-md bg-[#080B0A] border border-[#26332B] text-[#00E676] group-hover:border-[#00E676]/30 transition-colors">
                   {category.icon}
-                  <span className="font-mono font-bold uppercase tracking-tight">
-                    {category.title}
-                  </span>
                 </div>
-                <span className="text-[10px] font-mono text-green-600 animate-pulse">
-                  [{category.status}]
-                </span>
+                <h3 className="font-semibold text-[#F5F7F5] text-sm">
+                  {category.title}
+                </h3>
               </div>
 
               {/* Skills Tags */}
@@ -69,26 +97,16 @@ export default function Skills() {
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 bg-black border border-green-900 text-green-500/80 font-mono text-xs rounded-sm hover:text-white hover:border-green-400 transition-all cursor-default"
+                    className="px-2.5 py-1 bg-[#080B0A] border border-[#26332B] text-[#9CA8A0] text-xs rounded-md hover:text-[#00E676] hover:border-[#00E676]/20 transition-colors cursor-default"
                   >
                     {skill}
                   </span>
                 ))}
               </div>
-
-              {/* Decorative "Progress Bar" */}
-              <div className="mt-6 w-full bg-green-950/20 h-1.5 rounded-full overflow-hidden">
-                <motion.div 
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "100%" }}
-                  transition={{ duration: 1.5, delay: 0.5 }}
-                  className="h-full bg-gradient-to-r from-green-900 to-green-500"
-                />
-              </div>
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,96 +1,130 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Terminal, Shield, Cpu } from "lucide-react";
+import { Github, Linkedin, ArrowDown, FileDown, Mail } from "lucide-react";
 
 export default function Hero() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const withBasePath = (path: string) => `${basePath}${path}`;
   return (
-    <section className="h-screen flex flex-col justify-center items-center text-center relative overflow-hidden bg-black font-mono">
-      
-      {/* Background Grid & Scanline */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/5 to-transparent h-[200%] animate-scanline pointer-events-none" />
+    <section
+      id="home"
+      className="min-h-screen flex flex-col justify-center relative overflow-hidden"
+    >
+      {/* Subtle background grid */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[linear-gradient(to_right,#9CA8A0_1px,transparent_1px),linear-gradient(to_bottom,#9CA8A0_1px,transparent_1px)] bg-[size:60px_60px]" />
 
-      {/* Central Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-green-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+      {/* Soft gradient glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00E676]/5 blur-[150px] rounded-full pointer-events-none" />
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="z-10 px-6"
-      >
-        <motion.div 
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-4 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-900/50 bg-green-950/20 text-[10px] text-green-500 uppercase tracking-widest"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-          </span>
-          System_Status: Online
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold tracking-tighter text-white"
-        >
-          &gt; I'm <span className="text-green-500">ขัน</span>
-        </motion.h1>
-
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="mt-6 flex flex-col md:flex-row items-center gap-4 text-green-600/80 text-sm md:text-base"
-        >
-          <span className="flex items-center gap-2">
-            <Shield size={16} /> Cybersecurity Student
-          </span>
-          <span className="hidden md:block text-green-900">|</span>
-          <span className="flex items-center gap-2 text-green-400">
-            <Cpu size={16} /> AI Developer
-          </span>
-          <span className="hidden md:block text-green-900">|</span>
-          <span className="flex items-center gap-2">
-             <Terminal size={16} /> Web Dev
-          </span>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-12 flex flex-wrap justify-center gap-4"
+          transition={{ duration: 0.6 }}
         >
-          <a
-            href="#projects"
-            className="group relative px-8 py-3 bg-green-600 text-black font-bold uppercase text-xs tracking-widest hover:bg-green-400 transition-all overflow-hidden"
+          {/* Greeting */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mb-4"
           >
-            <span className="relative z-10">Access_Projects</span>
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </a>
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#26332B] bg-[#101613] text-xs text-[#00E676] font-mono">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E676] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00E676]" />
+              </span>
+              Available for opportunities
+            </span>
+          </motion.div>
 
-          <a
-            href="#contact"
-            className="px-8 py-3 border border-green-900 text-green-500 font-bold uppercase text-xs tracking-widest hover:bg-green-950/30 transition-all"
-          >
-            Init_Contact
-          </a>
+          {/* Main Heading */}
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-[#F5F7F5] mb-4">
+            Hi, I&apos;m{" "}
+            <span className="text-[#00E676]">Jakapan.</span>
+          </h1>
+
+          {/* Professional Title */}
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#9CA8A0] mb-6">
+            Junior Full-Stack Developer
+          </h2>
+
+          {/* Description */}
+          <p className="text-base sm:text-lg text-[#9CA8A0] max-w-2xl leading-relaxed mb-10">
+            I build full-stack web applications, integrate AI-powered solutions,
+            and develop secure, scalable systems.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-3 mb-10">
+            <a
+              href="#projects"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#00E676] text-[#080B0A] font-semibold text-sm rounded-lg hover:bg-[#00C853] transition-all duration-200 hover:shadow-lg hover:shadow-[#00E676]/20"
+            >
+              <ArrowDown size={16} />
+              View Projects
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-[#26332B] text-[#F5F7F5] font-semibold text-sm rounded-lg hover:bg-[#101613] hover:border-[#00E676]/30 transition-all duration-200"
+            >
+              <Mail size={16} />
+              Contact Me
+            </a>
+            <a
+              href={withBasePath("/Jakapan_Ploensup_Resume.pdf")}
+              download="Jakapan_Ploensup_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-[#26332B] text-[#9CA8A0] font-semibold text-sm rounded-lg hover:bg-[#101613] hover:border-[#00E676]/30 hover:text-[#F5F7F5] transition-all duration-200"
+            >
+              <FileDown size={16} />
+              Download Resume
+            </a>
+          </div>
+
+          {/* Social Links */}
+          <div className="flex items-center gap-4">
+            <a
+              href="https://github.com/Bento12ad"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-lg border border-[#26332B] text-[#9CA8A0] hover:text-[#00E676] hover:border-[#00E676]/30 hover:bg-[#101613] transition-all duration-200"
+              aria-label="GitHub"
+            >
+              <Github size={20} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/jakapan-ploensup-620678284"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-lg border border-[#26332B] text-[#9CA8A0] hover:text-[#00E676] hover:border-[#00E676]/30 hover:bg-[#101613] transition-all duration-200"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={20} />
+            </a>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
 
-      {/* Footer Meta info */}
+      {/* Subtle terminal decoration — bottom left */}
       <div className="absolute bottom-10 left-10 hidden lg:block">
-        <p className="text-[10px] text-green-900 font-mono text-left leading-tight">
-          LOC: BANGKOK, TH<br />
-          STACK: NEXT_JS // PYTHON // MONGO<br />
-          PORT: 3000 // STATUS: 200
+        <p className="text-xs text-[#26332B] font-mono leading-relaxed">
+          Pathum Thani / Bangkok, TH
+          <br />
+          Full-Stack · AI · Security
         </p>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+      >
+        <ArrowDown size={20} className="text-[#26332B]" />
+      </motion.div>
     </section>
   );
 }

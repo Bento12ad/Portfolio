@@ -1,83 +1,87 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { User, BookOpen, Code2 } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6 bg-black">
-      <div className="max-w-4xl mx-auto">
-        {/* Terminal Window Header */}
-        <div className="bg-[#1a1a1a] rounded-t-lg p-3 flex items-center gap-2 border-x border-t border-green-900/30">
-          <div className="w-3 h-3 rounded-full bg-red-500/80" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-          <div className="w-3 h-3 rounded-full bg-green-500/80" />
-          <span className="text-xs text-gray-500 ml-2 font-mono italic">bash — profile.sh</span>
+    <section id="about" className="py-24">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="max-w-4xl mx-auto"
+      >
+        {/* Section Header */}
+        <div className="flex items-center gap-3 mb-10">
+          <div className="h-px w-8 bg-[#00E676]" />
+          <h2 className="text-2xl font-bold text-[#F5F7F5]">About Me</h2>
         </div>
 
-        {/* Terminal Body */}
-        <div className="bg-[#0a0a0a] border border-green-900/30 p-8 rounded-b-lg shadow-[0_0_30px_rgba(34,197,94,0.05)] relative overflow-hidden">
-          {/* Subtle Scanline Overlay */}
-          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Main Content */}
+          <div className="md:col-span-2 space-y-5">
+            <p className="text-[#9CA8A0] leading-relaxed text-base">
+              I&apos;m a Computer Science student specializing in Data Security at
+              Bangkok University, with hands-on experience in full-stack
+              development, AI integration, and application security testing.
+            </p>
+            <p className="text-[#9CA8A0] leading-relaxed text-base">
+              I enjoy building practical software solutions, developing backend
+              systems, integrating AI technologies, and exploring ways to make
+              applications more secure and reliable.
+            </p>
+            <p className="text-[#9CA8A0] leading-relaxed text-base">
+              My experience includes independently developing and deploying
+              full-stack applications, working with OCR and AI workflows, and
+              conducting penetration testing during my internship.
+            </p>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="font-mono relative z-10"
-          >
-            {/* Header / Title */}
-            <div className="flex items-center gap-2 mb-8">
-              <span className="text-green-500 font-bold">$</span>
-              <motion.h2 
-                className="text-xl md:text-2xl text-green-400 font-bold uppercase tracking-tighter"
-                initial={{ width: 0 }}
-                whileInView={{ width: "fit-content" }}
-                transition={{ duration: 1, ease: "easeOut" }}
-              >
-                whoami
-              </motion.h2>
-              <motion.span 
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{ repeat: Infinity, duration: 0.8 }}
-                className="w-2.5 h-6 bg-green-500"
-              />
-            </div>
-
-            {/* Content Body */}
-            <div className="space-y-6 text-green-500/90 md:text-lg leading-relaxed">
-              <div>
-                <p><span className="text-white brightness-125">NAME:</span> Khun (Jakapan Ploensup)</p>
-                <p><span className="text-white brightness-125">FOCUS:</span> Cybersecurity // Full-stack Development</p>
-                <p><span className="text-white brightness-125">STATUS:</span> Active_Developer_v2.0</p>
+          {/* Quick Info Cards */}
+          <div className="space-y-4">
+            <div className="p-4 rounded-lg border border-[#26332B] bg-[#101613]">
+              <div className="flex items-center gap-2 mb-2">
+                <User size={16} className="text-[#00E676]" />
+                <span className="text-xs font-medium text-[#9CA8A0] uppercase tracking-wider">
+                  Focus
+                </span>
               </div>
-              
-              <p>
-                I specialize in architecting <span className="text-green-300 border-b border-green-900">secure web applications</span> and 
-                <span className="text-green-300 border-b border-green-900 ml-1">AI-driven automation</span>. 
-                My expertise lies in bridging the gap between robust backend logic and hardened security protocols.
-              </p>
-
-              <div className="bg-green-950/10 p-4 border-l-2 border-green-500/50 text-sm md:text-base">
-                <p className="text-green-400 mb-1">// Technical_Specs:</p>
-                <p className="text-gray-400">
-                  Main_Stack: Next.js, Python, MongoDB <br />
-                  Specialization: Content Moderation AI, Penetration Testing
-                </p>
-              </div>
-
-              <p className="text-green-600/70 italic text-sm md:text-base">
-                &gt; Mission: Building secure, scalable, and intelligent digital environments.
+              <p className="text-sm text-[#F5F7F5]">
+                Full-Stack Development, AI Integration, Application Security
               </p>
             </div>
 
-            {/* Footer Prompt */}
-            <div className="mt-10 flex items-center gap-2">
-              <span className="text-green-500 font-bold">$</span>
-              <span className="animate-pulse text-green-500">_</span>
+            <div className="p-4 rounded-lg border border-[#26332B] bg-[#101613]">
+              <div className="flex items-center gap-2 mb-2">
+                <BookOpen size={16} className="text-[#00E676]" />
+                <span className="text-xs font-medium text-[#9CA8A0] uppercase tracking-wider">
+                  Education
+                </span>
+              </div>
+              <p className="text-sm text-[#F5F7F5]">
+                B.IT — Computer Science, Data Security
+              </p>
+              <p className="text-xs text-[#9CA8A0] mt-1">
+                Bangkok University · Expected Dec 2026
+              </p>
             </div>
-          </motion.div>
+
+            <div className="p-4 rounded-lg border border-[#26332B] bg-[#101613]">
+              <div className="flex items-center gap-2 mb-2">
+                <Code2 size={16} className="text-[#00E676]" />
+                <span className="text-xs font-medium text-[#9CA8A0] uppercase tracking-wider">
+                  Location
+                </span>
+              </div>
+              <p className="text-sm text-[#F5F7F5]">
+                Pathum Thani / Bangkok, Thailand
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
